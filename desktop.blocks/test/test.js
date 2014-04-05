@@ -3,9 +3,11 @@ modules.define('i-bem__dom', function(provide, BEMDOM) {
         onSetMod: {
             'js': {
                 'inited': function() {
-                    console.log(BEM.I18N('test', 'lang'));
+                    console.log(BEM.I18N.lang(), BEM.I18N('test', 'lang'));
                 }
             }
         }
     });
-})
+
+    provide(BEMDOM);
+});

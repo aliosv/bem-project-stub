@@ -14,8 +14,15 @@ module.exports = function(config) {
             // DEPS
             new (require('enb-modules/techs/deps-with-modules')),
 
-            // BEMHTML
-            new (require('enb-bemxjst/techs/bemhtml'))(),
+            // CSS
+            // TODO: roole config
+            // TODO: roole urls
+            [ require('enb-roole/techs/css-roole'), { target: '?.roo', options: { prefixes: [] } } ],
+            new (require('enb-autoprefixer/techs/css-autoprefixer'))({
+                sourceTarget: "?.roo",
+                destTarget: "?.css",
+                browserSupport: ['last 2 versions']
+            }),
 
             // KEYSETS
             [ require("enb/techs/i18n-merge-keysets"), { lang: "all" }],
@@ -33,27 +40,19 @@ module.exports = function(config) {
             // TODO: not working modules.define({ block: ... })
             new (require('enb-modules/techs/prepend-modules'))({ source: '?.browser.js' }),
             // add i18n to js
-            // TODO: use useSourceFilename instead useFileList
-            [ require('enb/techs/js-i18n'), { lang: '{lang}' } ],
+            // TODO: use use SourceFilename instead useFileList
+            [ require('../.bem/techs/js-i18n'), { lang: '{lang}' } ],
 
-            // CSS
-            // TODO: roole config
-            // TODO: roole urls
-            new (require('enb-roole/techs/css-roole'))({ target: '?.roo' }),
-            new (require('enb-autoprefixer/techs/css-autoprefixer'))({
-                sourceTarget: "?.roo",
-                destTarget: "?.css",
-                browserSupport: ['last 2 versions']
-            }),
+            // BEMHTML
+            new (require('enb-bemxjst/techs/bemhtml'))(),
 
             // HTML
-            // TODO: _i18n_yes in i-bem__js
             // TODO: i18n not work
-            new (require('enb/techs/html-from-bemjson-i18n'))()
+            [ require('enb/techs/html-from-bemjson-i18n'), { destTarget: '?.{lang}.html' } ]
         ]);
         nodeConfig.addTargets([
-            '_?.{lang}.js',
             '_?.css',
+            '_?.{lang}.js',
             '?.{lang}.html'
         ]);
     });

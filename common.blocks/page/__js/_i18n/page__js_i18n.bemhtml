@@ -1,0 +1,5 @@
+block('page').elem('js')(
+    attrs().match(function() { return this.ctx.url; })(function() {
+        return { src : this.ctx.url.replace(/(\.[^.]+)$/, '.' + BEM.I18N.lang() + '$1') };
+    })
+);

@@ -1,0 +1,6 @@
+.test
+{
+    box-sizing: border-box;
+    background-image: url(test.png);
+    color: #000;
+}
