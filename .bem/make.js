@@ -15,7 +15,6 @@ module.exports = function(config) {
             new (require('enb-modules/techs/deps-with-modules')),
 
             // CSS
-            // TODO: roole urls bug(example: blocks form bem-components)
             [ require('enb-roole/techs/css-roole'), { target: '?.roo' } ],
             new (require('enb-autoprefixer/techs/css-autoprefixer'))({
                 sourceTarget: "?.roo",
